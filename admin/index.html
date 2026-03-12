@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Renit Resourcing</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renit Resourcing</title>
 
-<!-- Netlify Identity Widget -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
-
 <body>
 
-<h1>Renit Resourcing</h1>
-<p>Microsoft Technology Talent & Project Delivery</p>
+  <h1>Renit Resourcing</h1>
+  <p>Microsoft Technology Talent & Project Delivery</p>
+  <p>Website under development.</p>
 
-<p>Website under development.</p>
+  <script>
+    // Wait for Netlify Identity to load
+    if (window.netlifyIdentity) {
+      
+      window.netlifyIdentity.on("init", user => {
+        const hash = window.location.hash;
 
-<script>
-if (window.netlifyIdentity) {
-  window.netlifyIdentity.on("init", user => {
-
-    // If invite token exists in URL, show signup screen
-    const hash = window.location.hash;
-
-    if (hash && hash.includes("invite_token")) {
-      window.netlifyIdentity.open("signup");
-    }
-
-    if (!user) {
-      window.netlifyIdentity.on("login", () => {
-        document.location.href = "/admin/";
+        // If invite token exists, force signup
+        if (hash && hash.includes("invite_token")) {
+          window.netlifyIdentity.open("signup");
+        } else if (!user) {
+          // Show login widget if no user
+          window.netlifyIdentity.open("login");
+        }
       });
+
+      // On successful login, redirect to /admin
+      window.netlifyIdentity.on("login", user => {
+        window.location.href = "/admin/";
+      });
+
+      // Optional: logout handling
+      window.netlifyIdentity.on("logout", () => {
+        window.location.href = "/";
+      });
+
+      // Initialize the widget
+      window.netlifyIdentity.init();
     }
-
-  });
-
-  window.netlifyIdentity.init();
-}
-</script>
+  </script>
 
 </body>
 </html>
