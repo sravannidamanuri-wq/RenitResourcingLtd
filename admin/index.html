@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Renit CMS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renit Resourcing</title>
 
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<!-- Netlify Identity Widget -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 </head>
 
 <body>
 
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.init();
-    window.netlifyIdentity.open();
-  }
-</script>
+<h1>Renit Resourcing</h1>
+<p>Microsoft Technology Talent & Project Delivery</p>
 
-<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<p>Website under development.</p>
+
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", user => {
+
+    // If invite token exists in URL, show signup screen
+    const hash = window.location.hash;
+
+    if (hash && hash.includes("invite_token")) {
+      window.netlifyIdentity.open("signup");
+    }
+
+    if (!user) {
+      window.netlifyIdentity.on("login", () => {
+        document.location.href = "/admin/";
+      });
+    }
+
+  });
+
+  window.netlifyIdentity.init();
+}
+</script>
 
 </body>
 </html>
