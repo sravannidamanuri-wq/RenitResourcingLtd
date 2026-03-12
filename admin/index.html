@@ -15,33 +15,30 @@
   <p>Website under development.</p>
 
   <script>
-    // Wait for Netlify Identity to load
     if (window.netlifyIdentity) {
-      
-      window.netlifyIdentity.on("init", user => {
-        const hash = window.location.hash;
 
-        // If invite token exists, force signup
-        if (hash && hash.includes("invite_token")) {
-          window.netlifyIdentity.open("signup");
-        } else if (!user) {
-          // Show login widget if no user
-          window.netlifyIdentity.open("login");
-        }
-      });
+      // Initialize the widget
+      window.netlifyIdentity.init();
 
-      // On successful login, redirect to /admin
+      // Check URL hash for invite
+      const hash = window.location.hash;
+      if (hash && hash.includes("invite_token")) {
+        // If invited, open signup modal
+        window.netlifyIdentity.open("signup");
+      } else {
+        // If not invited, open login modal
+        window.netlifyIdentity.open("login");
+      }
+
+      // Redirect to /admin after login
       window.netlifyIdentity.on("login", user => {
         window.location.href = "/admin/";
       });
 
-      // Optional: logout handling
+      // Optional: redirect to homepage on logout
       window.netlifyIdentity.on("logout", () => {
         window.location.href = "/";
       });
-
-      // Initialize the widget
-      window.netlifyIdentity.init();
     }
   </script>
 
