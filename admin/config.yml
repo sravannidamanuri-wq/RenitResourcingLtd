@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPOSITORY
+  repo: sravannidamanuri-wq/RenitResourcingLtd
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
