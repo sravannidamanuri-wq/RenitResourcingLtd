@@ -3,50 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renit Resourcing</title>
+  <title>Renit CMS</title>
 
-  <!-- Netlify Identity Widget -->
+  <!-- Netlify Identity -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Netlify CMS (THIS IS THE MISSING PIECE) -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 </head>
 <body>
-
-  <h1>Renit Resourcing</h1>
-  <p>Microsoft Technology Talent & Project Delivery</p>
-  <p>Website under development.</p>
-
-  <script>
-    if (window.netlifyIdentity) {
-      // Initialize the widget first
-      window.netlifyIdentity.init();
-
-      // Helper to check for invite token in URL
-      function hasInviteToken() {
-        const params = new URLSearchParams(window.location.search);
-        return params.has('invite_token');
-      }
-
-      // Wait until the widget is ready
-      window.netlifyIdentity.on('init', user => {
-        if (hasInviteToken()) {
-          // If invite token exists, show signup modal
-          window.netlifyIdentity.open('signup');
-        } else if (!user) {
-          // If no user logged in, show login modal
-          window.netlifyIdentity.open('login');
-        }
-      });
-
-      // Redirect to /admin after login
-      window.netlifyIdentity.on('login', user => {
-        window.location.href = '/admin/';
-      });
-
-      // Optional: redirect to homepage on logout
-      window.netlifyIdentity.on('logout', () => {
-        window.location.href = '/';
-      });
-    }
-  </script>
-
 </body>
 </html>
